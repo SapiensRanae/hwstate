@@ -1,32 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-
-function Kid({pMin = 0, pMax = 10, idU, nameU}) {
-    const [id, setId] = useState(idU);
-    const [name, setName] = useState(nameU);
-    const [points, setPoints] = useState(0);
-
-    const handlePointsI = () => {
-      if (points < pMax) {
-          setPoints(points + 1);
-      }
-    }
-
-    const handlePointsD = () => {
-        if (points > pMin) {
-            setPoints(points - 1);
-        }
-    }
+function Kid({ pMin = 0, pMax = 10, idU, nameU, points = 0, onInc, onDec, style }) {
+    const canDec = points > pMin;
+    const canInc = points < pMax;
 
     return (
-        <div>
-            <p>ID: {id}</p>
-            <p>Name: {name}</p>
+        <div style={style}>
+            <p>ID: {idU}</p>
+            <p>Name: {nameU}</p>
             <p>Points: {points}</p>
-            <button onClick={handlePointsD}>-</button>
-            <button onClick={handlePointsI}>+</button>
+            <button onClick={onDec} disabled={!canDec}>-</button>
+            <button onClick={onInc} disabled={!canInc}>+</button>
         </div>
-
     );
 }
 
